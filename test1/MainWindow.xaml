@@ -7,15 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="134,132,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="152,248,0,0" VerticalAlignment="Top" Click="button1_Click"/>
-        <ListView x:Name="listview" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="471,95,86,188">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Button x:Name="button1" Content="Добавить тур" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Click="button1_Click"/>
+        <ComboBox x:Name="ComboBoxCountry" HorizontalAlignment="Left" Margin="400,178,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxHotel" HorizontalAlignment="Left" Margin="538,178,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Margin="43,180,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="88"/>
+        <TextBox x:Name="TextBoxDescription" HorizontalAlignment="Left" Margin="150,178,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="104"/>
+        <TextBox x:Name="TextBoxPrice" HorizontalAlignment="Left" Margin="266,178,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

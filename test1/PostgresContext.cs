@@ -6,8 +6,18 @@ namespace test1;
 
 public partial class PostgresContext : DbContext
 {
+    public DbSet<Country> countries { get; set; }
+    public DbSet<Customer> customers { get; set; }
+    public DbSet<Employee> employees { get; set; }
+    public DbSet<Hotel> hotels { get; set; }
+    public DbSet<Sale> sales { get; set; }
+    public DbSet<Tour> tours { get; set; }
+
     public PostgresContext()
     {
+        //Database.EnsureDeleted();
+        //Database.EnsureCreated();
+
     }
 
     public PostgresContext(DbContextOptions<PostgresContext> options)
@@ -15,45 +25,17 @@ public partial class PostgresContext : DbContext
     {
     }
 
-    public virtual DbSet<Student> Students { get; set; }
-
-    public virtual DbSet<Teacher> Teachers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=test;Username=postgres;Password=1003");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresExtension("pg_catalog", "adminpack");
-
-        modelBuilder.Entity<Student>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("student_pkey");
-
-            entity.ToTable("student");
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.Sname)
-                .HasMaxLength(20)
-                .HasColumnName("sname");
-        });
-
-        modelBuilder.Entity<Teacher>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("teacher_pkey");
-
-            entity.ToTable("teacher");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(10L, null, null, null, null, null)
-                .HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(20);
-            entity.Property(e => e.Age);
-        });
-
-        OnModelCreatingPartial(modelBuilder);
+        modelBuilder.Entity<Country>().HasKey(u => u.Id).HasName("CountryPrimaryKey");
+        modelBuilder.Entity<Customer>().HasKey(u => u.Id).HasName("CustomerPrimaryKey");
+        modelBuilder.Entity<Employee>().HasKey(u => u.Id).HasName("EmployeePrimaryKey");
+        modelBuilder.Entity<Hotel>().HasKey(u => u.Id).HasName("HotelPrimaryKey");
+        modelBuilder.Entity<Sale>().HasKey(u => u.Id).HasName("SalePrimaryKey");
+        modelBuilder.Entity<Tour>().HasKey(u => u.Id).HasName("TourPrimaryKey");
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
