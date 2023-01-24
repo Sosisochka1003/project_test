@@ -26,14 +26,27 @@ namespace test1
         public MainWindow()
         {
             InitializeComponent();
-            
+            var country = db.countries.ToList();
+            var hotel = db.hotels.ToList();
+            foreach (var item in country)
+            {
+                ComboBoxCountry.Items.Add(item.Id);
+            }
+            foreach (var item in hotel)
+            {
+                ComboBoxHotel.Items.Add(item.Id);
+            }
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            var klema = db.Students.ToList();
-            listview.ItemsSource= klema;
-            listview.Width = 300;
+            Country country = new Country { Id = Convert.ToInt32(ComboBoxCountry.SelectedValue)};
+            Hotel hotel = new Hotel { Id = Convert.ToInt32(ComboBoxHotel.SelectedValue) };
+            Tour temp = new Tour { Name = TextBoxName.Text, Description = TextBoxDescription.Text, Price = Convert.ToInt32(TextBoxPrice.Text), Country = country, Hotel = hotel};
+            //MessageBox.Show(ComboBoxCountry.SelectedIndex.ToString());
+            db.tours.Add(temp);
+
+            db.SaveChanges();
         }
     }
 }
